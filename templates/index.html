@@ -1,0 +1,76 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='style.css')}}">
+
+    <title>Pneumonia Diagnosis</title>
+  </head>
+  <body>
+    <div id='outerindex' class="container">
+      <div class="jumbotron" >
+        
+        <h1>Pneumonia Diagnosis</h1>
+        <h5> Upload the x-ray image to check for Pneumonia with a Deep learning Model trained with PyTorch</h5>
+        <br>
+        <h6>Preferably upload a RGB image, single channel images will be convert to RGB</h6>
+
+          <div id="box1" class="row justify-content-center align-items-center">
+            <div class="col-8 align-self-center">
+              <form method=POST enctype=multipart/form-data action="{{ url_for('upload') }}">
+              <div class="input-group mb-3">
+                <div class="input-group-prepend">
+                  <button class="btn btn-outline-secondary btn-light" type="submit" id="inputGroupFileAddon03" disabled="disabled">Upload</button>
+                </div>
+                <div class="custom-file">
+                  <input type="file" class="custom-file-input" id="inputGroupFile01" aria-describedby="inputGroupFileAddon01" name=photo onchange="readURL(this);" >
+                  <label class="custom-file-label" for="inputGroupFile01">Choose file</label>
+                  
+                </div>
+              </div>
+              </form>
+              <div id='img_box'>
+                <img id="xray_img" class=".img-fluid" style="max-width: 100%; height: auto;" >
+              </div>
+               
+            </div>
+          </div> 
+          <br>
+          <h5>Download a 3 channel X-Ray image from the internet or directly checkout the following examples.</h5>
+          <br>
+          <div class="row">
+            <!-- "window.location.href='{{ url_for( 'submit_example', example='normal' ) }}';" -->
+            <div class="col"><button onclick="window.location.href='{{ url_for( 'submit_example', example='normal' ) }}';" type="button" class="btn btn-dark"> Normal XRay Example</button></div>
+            <div class="col"><button onclick="window.location.href='{{ url_for( 'submit_example', example='pseumonia' ) }}';" type="button" class="btn btn-dark">Pneumonia XRay Example</button></div>
+          </div> 
+      </div>    
+    </div>
+
+    <!-- Optional JavaScript -->
+    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+    <script type="text/javascript">
+      function readURL(input) {
+        if (input.files && input.files[0]) {
+            var reader = new FileReader();
+
+            reader.onload = function (e) {
+                $('#xray_img')
+                    .attr('src', e.target.result);
+                    // .width(300)
+                    // .height(250);
+            };
+            document.getElementById('inputGroupFileAddon03').removeAttribute('disabled');
+            reader.readAsDataURL(input.files[0]);
+        }
+    }
+    </script>
+  </body>
+</html>
