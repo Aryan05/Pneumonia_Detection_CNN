@@ -16,7 +16,7 @@ Checkout the 2 examples NORMAL & PNEUMONIA , if you don't have a x-ray image.
 ```
 MIT License
 
-Copyright (c) 2019 Shangeth
+Copyright (c) 2020 Aryan05
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
